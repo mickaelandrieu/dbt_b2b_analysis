@@ -1,0 +1,88 @@
+version: 2
+
+sources:
+    - name: sales_analytics
+      description: A clone of a BigQuery RAW database.
+      database: swile-case-study
+      schema: raw
+      tables:
+        - name: users
+          description: Raw Commercials data (from BigQuery)
+          columns:
+            - name: employeeId
+              description: Primary key for commercials
+              tests:
+                - unique
+                - not_null
+            
+            - name: firstName
+              description: First name of the commercial
+            
+            - name: lastName
+              description: Family name of the commercial
+            
+            - name: startDate
+              description: Hiring date of the commercial
+            
+            - name: localization
+              description: Attached localization of the commercial, also refered as "Team"
+            
+            - name: birthDate
+              description: Birth date of the commercial
+
+        - name: opportunities
+          description: Raw Opportunities data (from BigQuery)
+          columns:
+            - name: id
+              description: Primary key for opportunities
+              tests:
+                - unique
+                - not_null
+            
+            - name: status
+              description: "{{ doc('opportunity_statuses') }}"
+              tests:
+                - accepted_values:
+                    values:
+                      - signed
+                      - lost
+                      - never touched
+                      - under negociation
+            
+            - name: accountId
+              description: The Customer Identifier
+              tests:
+                - not_null
+
+            - name: ownerId
+              description: The Commercial Identifier
+              tests:
+                - relationships:
+                    to: ref('stg_commercials')
+                    field: commercial_id
+            
+            - name: attributionDate
+              description: The Date the deal was assigned to the Commercial
+              tests:
+                - not_null
+
+        - name: accounts_with_bookings
+          description: Raw Bookings data (from BigQuery)
+          columns:
+            - name: accountId
+              description: Foreign key for Commercial
+              tests:
+                - not_null
+                - relationships:
+                    to: ref('stg_opportunities')
+                    field: customer_id
+
+            - name: month
+              description: Booking date (on monthly time frame)
+              tests:
+                - not_null
+            
+            - name: grossBookings
+              description: Number of tickets ordered by the Customer
+              tests:
+                - not_null

@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: Fact to calculate orders metrics.
+    columns: 
+      - name: commercial_id
+        description: The commercial identifier.
+        tests:
+          - not_null
+      
+      - name: month
+        description: The month timeframe.
+        tests:
+          - not_null
+      
+      - name: orders
+        description: The orders done by the Customers assigned to the Commercial.
+        tests:
+          - not_null
+
+  - name: fct_signatures
+    description: Fact to calculate signatures metrics.
+    columns:
+      - name: commercial_id
+        description: The commercial identifier.
+        tests:
+          - not_null
+
+      - name: month
+        description: The month timeframe.
+        tests:
+          - not_null
+
+      - name: signed
+        description: The opportunities signed by the Commercial.
+        tests:
+          - not_null
+
+      - name: lost
+        description: The opportunities lost by the Commercial.
+        tests:
+          - not_null
+
+      - name: never_touched
+        description: The opportunities never touched by the Commercial during this timeframe.
+        tests:
+          - not_null
+
+      - name: under_negociation
+        description: The opportunities in pending state during this timeframe.
+        tests:
+          - not_null
