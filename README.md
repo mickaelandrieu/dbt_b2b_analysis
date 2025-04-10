@@ -2,11 +2,11 @@
 
 ## Plan/Stratégie
 
-1 - Chargement dans Google BigQuery
-2 - Connection dans dbt
-3 - Creation de la structure
-4 - Mise en place staging/marts
-5 - Visualisation Google Data Studio
+* 1 - Chargement dans Google BigQuery
+* 2 - Connection dans dbt
+* 3 - Creation de la structure
+* 4 - Mise en place staging/marts
+* 5 - Visualisation Google Data Studio
 
 
 
